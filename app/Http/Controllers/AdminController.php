@@ -8,7 +8,7 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
 
 use DB, Validator, Redirect, Crypt;
-use App\User;
+use App\User, App\Tree;
 
 class AdminController extends Controller
 {
@@ -32,7 +32,14 @@ class AdminController extends Controller
         if ($validator->fails()) return Redirect::back()->withErrors($validator)->withInput();
     	  $message = '';
 
-    	   if(User::create($data)) {
+    	   if($child_id = User::create($data)->id) {
+            if($request->placed_under != '') {
+              $parent_id = $request->placed_under;
+              $tree_data['parent_id'] = $parent_id;
+              $tree_data['child_id']  = $child_id;
+
+              Tree::create($tree_data);
+            }
             $message .= 'Customer added successfully !';
         }else{
             $message .= 'Unable to add Customer !';
