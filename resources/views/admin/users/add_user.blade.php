@@ -3,7 +3,7 @@
 @section('content')
 <div class="row">
     <div class="span12">
-        <div class="panel panel-default"> {{ dump($errors)}}
+        <div class="panel panel-default">
             <div class="panel-heading"><h2>Add Customer</h2></div>
             <div class="panel-body">
               {!! Form::open(array('route' => 'admin.store.user', 'id' => 'admin.store.user', 'class' => 'form-horizontal row-border')) !!}

@@ -15,6 +15,30 @@
   {!! $errors->first('date_of_joining', '<span class="help-inline">:message</span>') !!}
 </div>
 
+<div class="control-group {{ $errors->has('guardian_name') ? 'has-error' : ''}}">
+  {!! Form::label('guardian_name', 'F/H Name', array('class' => 'span3 control-label')) !!}
+  <div class="span9">
+    {!! Form::text('guardian_name', null, ['class' => 'span5 form-control required', 'id' => 'guardian_name', 'placeholder' => 'Father\'s Name or Husband Name', 'autocomplete' => 'off']) !!}
+  </div>
+  {!! $errors->first('guardian_name', '<span class="help-inline">:message</span>') !!}
+</div>
+
+<div class="control-group {{ $errors->has('village') ? 'has-error' : ''}}">
+  {!! Form::label('village', '', array('class' => 'span3 control-label')) !!}
+  <div class="span9">
+    {!! Form::text('village', null, ['class' => 'span5 form-control required', 'id' => 'village', 'placeholder' => 'Village', 'autocomplete' => 'off']) !!}
+  </div>
+  {!! $errors->first('village', '<span class="help-inline">:message</span>') !!}
+</div>
+
+<div class="control-group {{ $errors->has('post_office') ? 'has-error' : ''}}">
+  {!! Form::label('post_office', '', array('class' => 'span3 control-label')) !!}
+  <div class="span9">
+    {!! Form::text('post_office', null, ['class' => 'span5 form-control required', 'id' => 'post_office', 'placeholder' => 'Post Office', 'autocomplete' => 'off']) !!}
+  </div>
+  {!! $errors->first('post_office', '<span class="help-inline">:message</span>') !!}
+</div>
+
 <div class="control-group {{ $errors->has('mobile') ? 'has-error' : ''}}">
   {!! Form::label('mobile_number*', '', array('class' => 'span3 control-label')) !!}
   <div class="span9">
@@ -40,9 +64,9 @@
 </div>
 
 <div class="control-group {{ $errors->has('placed_under') ? 'has-error' : ''}}">
-  {!! Form::label('placed_under', '', array('class' => 'span3 control-label')) !!}
+  {!! Form::label('placed_under', 'Sponsor Name', array('class' => 'span3 control-label')) !!}
   <div class="span9">
-    {!! Form::select('placed_under', $users, null, ['class' => 'span5 select2 required', 'id' => 'placed_under', 'placeholder' => 'Select Parent Customer',]) !!}
+    {!! Form::select('placed_under', $users, null, ['class' => 'span5 select2 required', 'id' => 'placed_under', 'placeholder' => 'Select Sponsor',]) !!}
   </div>
   {!! $errors->first('placed_under', '<span class="help-inline">:message</span>') !!}
 </div>
