@@ -6,8 +6,15 @@
   {!! $errors->first('name', '<span class="help-inline">:message</span>') !!}
 </div>
 
+<div class="control-group {{ $errors->has('date_of_birth') ? 'has-error' : ''}}">
+  {!! Form::label('date_of_birth*', '', array('class' => 'span3 control-label')) !!}
+  <div class="span9">
+    {!! Form::text('date_of_birth', null, ['class' => 'datepicker span3 form-control required', 'id' => 'date_of_birth', 'placeholder' => 'Date of Birth', 'autocomplete' => 'off', 'required' => 'true']) !!}
+  </div>
+  {!! $errors->first('date_of_birth', '<span class="help-inline">:message</span>') !!}
+</div>
 
-<div class="control-group {{ $errors->has('name') ? 'has-error' : ''}}">
+<div class="control-group {{ $errors->has('date_of_joining') ? 'has-error' : ''}}">
   {!! Form::label('date_of_joining*', '', array('class' => 'span3 control-label')) !!}
   <div class="span9">
     {!! Form::text('date_of_joining', null, ['class' => 'datepicker span3 form-control required', 'id' => 'date_of_joining', 'placeholder' => 'Date of Joining', 'autocomplete' => 'off', 'required' => 'true']) !!}
@@ -39,6 +46,15 @@
   {!! $errors->first('post_office', '<span class="help-inline">:message</span>') !!}
 </div>
 
+<div class="control-group {{ $errors->has('placed_under') ? 'has-error' : ''}}">
+  {!! Form::label('district_id', 'District', array('class' => 'span3 control-label')) !!}
+  <div class="span9">
+    {!! Form::select('district_id', $districts, null, ['class' => 'span5 select2 required', 'id' => 'district_id', 'placeholder' => 'Select District',]) !!}
+  </div>
+  {!! $errors->first('district_id', '<span class="help-inline">:message</span>') !!}
+</div>
+
+
 <div class="control-group {{ $errors->has('mobile') ? 'has-error' : ''}}">
   {!! Form::label('mobile_number*', '', array('class' => 'span3 control-label')) !!}
   <div class="span9">
@@ -56,11 +72,20 @@
 </div>
 
 <div class="control-group {{ $errors->has('address') ? 'has-error' : ''}}">
-  {!! Form::label('address*', '', array('class' => 'span3 control-label')) !!}
+  {!! Form::label('address', '', array('class' => 'span3 control-label')) !!}
   <div class="span9">
-    {!! Form::textarea('address', null, ['class' => 'span5 form-control required', 'id' => 'address', 'placeholder' => 'Address', 'autocomplete' => 'off',  'required' => 'true', 'rows' => 3]) !!}
+    {!! Form::textarea('address', null, ['class' => 'span5 form-control required', 'id' => 'address', 'placeholder' => 'Address', 'autocomplete' => 'off', 'rows' => 3]) !!}
   </div>
   {!! $errors->first('address', '<span class="help-inline">:message</span>') !!}
+</div>
+
+
+<div class="control-group {{ $errors->has('nominee') ? 'has-error' : ''}}">
+  {!! Form::label('nominee', 'F/H Name', array('class' => 'span3 control-label')) !!}
+  <div class="span9">
+    {!! Form::text('nominee', null, ['class' => 'span5 form-control required', 'id' => 'nominee', 'placeholder' => 'Nominee', 'autocomplete' => 'off']) !!}
+  </div>
+  {!! $errors->first('nominee', '<span class="help-inline">:message</span>') !!}
 </div>
 
 <div class="control-group {{ $errors->has('placed_under') ? 'has-error' : ''}}">

@@ -12,7 +12,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'mobile', 'email', 'address','username','password',
+        'name', 'guardian_name', 'date_of_birth', 'date_of_joining', 'village', 'post_office', 'district_id', 'mobile', 'email', 'address','username','password',
     ];
 
 	  protected $table    = 'users';
@@ -23,8 +23,10 @@ class User extends Authenticatable
     	'name' 				  =>  'required|max:128',
       'mobile'        =>  'required|numeric',
       'email'         =>  'email',
-      'address' 		  =>  'required|max:500',
+      'address' 		  =>  'max:500',
       'date_of_joining' => 'required|date_format:Y-m-d',
+      'date_of_birth' => 'date_format:Y-m-d',
+      'district_id'  => 'required'
     ];
 
     /**
@@ -35,4 +37,19 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function parent()
+    {
+        return $this->belongsTo('App\User', 'parent_id');
+    }
+
+    public function child()
+    {
+        return $this->belongsTo('App\User', 'child_id');
+    }
+
+    public function district()
+    {
+        return $this->belongsTo('App\District', 'district_id');
+    }
 }
