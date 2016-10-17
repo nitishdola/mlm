@@ -8,7 +8,7 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
 
 use DB, Validator, Redirect, Crypt;
-use App\User, App\Tree, App\District;
+use App\User, App\District;
 
 class AdminController extends Controller
 {
@@ -27,7 +27,7 @@ class AdminController extends Controller
       return view('admin.users.add_user', compact('users', 'districts'));
     }
 
-    public function storeUser(Request $request) {
+    public function storeUser(Request $request) { 
 
       $validator = Validator::make($data = $request->all(), User::$rules);
         if ($validator->fails()) return Redirect::back()->withErrors($validator)->withInput();
@@ -37,15 +37,12 @@ class AdminController extends Controller
         $data['username'] = $request->mobile;
         $data['password'] = bcrypt($request->mobile);
 
-    	   if($child_id = User::create($data)->id) {
-            if($request->placed_under != '') {
-              $parent_id = $request->placed_under;
-              $tree_data['parent_id'] = $parent_id;
-              $tree_data['child_id']  = $child_id;
+        if($request->placed_under != '') {
+          $data['parent_id'] = $request->placed_under;
+        }
 
-              Tree::create($tree_data);
-            }
-            $message .= 'Customer added successfully !';
+        if(User::create($data)) {
+          $message .= 'Customer added successfully !';
         }else{
             $message .= 'Unable to add Customer !';
         }
@@ -54,7 +51,7 @@ class AdminController extends Controller
     }
 
     public function viewUsers() {
-      $users        =  User::whereStatus(1)->orderBy('name', 'DESC')->with(['parent', 'child', 'district'])->paginate(50); dd($users);
+      $users        =  User::whereStatus(1)->orderBy('name', 'DESC')->with(['parent', 'district'])->paginate(50);
       return view('admin.users.view_users', compact('users'));
     }
 }

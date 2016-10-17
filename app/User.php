@@ -20,13 +20,13 @@ class User extends Authenticatable
     protected $guarded  = ['_token'];
 
     public static $rules = [
-    	'name' 				  =>  'required|max:128',
-      'mobile'        =>  'required|numeric',
-      'email'         =>  'email',
-      'address' 		  =>  'max:500',
-      'date_of_joining' => 'required|date_format:Y-m-d',
-      'date_of_birth' => 'date_format:Y-m-d',
-      'district_id'  => 'required'
+        'name' 				=>  'required|max:128',
+        'mobile'            =>  'required|numeric',
+        'email'             =>  'email',
+        'address' 		    =>  'max:500',
+        'date_of_joining'   => 'required|date_format:Y-m-d',
+        'date_of_birth'     => 'date_format:Y-m-d',
+        'district_id'       => 'required'
     ];
 
     /**
@@ -41,11 +41,6 @@ class User extends Authenticatable
     public function parent()
     {
         return $this->belongsTo('App\User', 'parent_id');
-    }
-
-    public function child()
-    {
-        return $this->belongsTo('App\User', 'child_id');
     }
 
     public function district()

@@ -11,7 +11,9 @@
 |
 */
 
-Route::get('/',['uses' => 'AdminAuth\AuthController@showLoginForm', 'middleware' => 'auth']);
+Route::get('/', function () {
+    return view('welcome');
+});
 
 Route::group(['middleware' => ['web']], function(){
 	Route::auth();
@@ -33,6 +35,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('admin/password/reset/{token?}','AdminAuth\PasswordController@showResetForm');
 
     Route::get('/admin', ['uses' => 'AdminController@index', 'as' => 'admin.home']);
+
 });
 
 Route::group(['prefix'=>'user'], function() {
