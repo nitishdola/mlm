@@ -40,15 +40,13 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    Laravel
+                    MLM
                 </a>
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
-                <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/home') }}">Home</a></li>
-                </ul>
+
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
@@ -74,10 +72,8 @@
                             </ul>
                         </li>
                     @else
-                        <li><a href="{{ url('/login') }}">Login User</a></li>
+                        <li><a href="{{ url('/login') }}"><b>Login User</b></a></li>
                         <li><a href="{{ url('/admin/login') }}">Login Admin</a></li>
-                        <li><a href="{{ url('/register') }}">Register User</a></li>
-                        <li><a href="{{ url('/admin/register') }}">Register Admin</a></li>
                     @endif
                 </ul>
             </div>

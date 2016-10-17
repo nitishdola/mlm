@@ -8,7 +8,7 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
 
 use DB, Validator, Redirect, Crypt;
-use App\User, App\Tree, App\District;
+use App\User, App\District;
 
 class AdminController extends Controller
 {
@@ -28,6 +28,7 @@ class AdminController extends Controller
     }
 
     public function storeUser(Request $request) {
+
         $validator = Validator::make($data = $request->all(), User::$rules);
         if ($validator->fails()) return Redirect::back()->withErrors($validator)->withInput();
     	  $message = '';
@@ -36,15 +37,12 @@ class AdminController extends Controller
         $data['username'] = $request->mobile;
         $data['password'] = bcrypt($request->mobile);
 
-    	   if($child_id = User::create($data)->id) {
-            if($request->placed_under != '') {
-              $parent_id = $request->placed_under;
-              $tree_data['parent_id'] = $parent_id;
-              $tree_data['child_id']  = $child_id;
+        if($request->placed_under != '') {
+          $data['parent_id'] = $request->placed_under;
+        }
 
-              Tree::create($tree_data);
-            }
-            $message .= 'Customer added successfully !';
+        if(User::create($data)) {
+          $message .= 'Customer added successfully !';
         }else{
             $message .= 'Unable to add Customer !';
         }
@@ -53,7 +51,40 @@ class AdminController extends Controller
     }
 
     public function viewUsers() {
-      $users        =  User::whereStatus(1)->orderBy('name', 'DESC')->with(['parent', 'child', 'district'])->paginate(50); dd($users);
+      $users        =  User::whereStatus(1)->orderBy('name', 'DESC')->with(['district'])->paginate(50);
+      foreach ($users as $key => $value) {
+        //check if child exist
+        $child = User::whereStatus(1)->where('parent_id', $value->id)->count();
+        $users[$key]['child'] = $child;
+      }
       return view('admin.users.view_users', compact('users'));
+    }
+
+    public function viewUsersInfo($id) {
+      $info =  User::whereId($id)->with(['district', 'parent'])->first();
+      $childs = User::where('parent_id', $id)->with(['district'])->get();
+      return view('admin.users.view_user_info', compact('info', 'childs'));
+    }
+
+    public function editUser($id) {
+      $user = User::findOrFail($id);
+
+      $users        =  User::whereStatus(1)->orderBy('name', 'DESC')->lists('name', 'id')->toArray();
+      $districts    =  District::whereStatus(1)->orderBy('name', 'DESC')->lists('name', 'id')->toArray();
+
+      return view('admin.users.edit_user', compact('user', 'users', 'districts'));
+    }
+
+    public function updateUser(Request $request, $id) {
+      $user = User::findOrFail($id);
+
+      $user->fill($request->all());
+      $message = '';
+      if($user->save()) {
+          $message .= 'User Updated Successfully !';
+      }else{
+          $message .= 'Unable to update  User !';
+      }
+      return Redirect::route('admin.user.info', $user->id)->with('message', $message);
     }
 }

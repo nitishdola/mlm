@@ -46,7 +46,7 @@
   {!! $errors->first('post_office', '<span class="help-inline">:message</span>') !!}
 </div>
 
-<div class="control-group {{ $errors->has('placed_under') ? 'has-error' : ''}}">
+<div class="control-group {{ $errors->has('district_id') ? 'has-error' : ''}}">
   {!! Form::label('district_id', 'District', array('class' => 'span3 control-label')) !!}
   <div class="span9">
     {!! Form::select('district_id', $districts, null, ['class' => 'span5 select2 required', 'id' => 'district_id', 'placeholder' => 'Select District',]) !!}

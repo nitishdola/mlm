@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('email', 50);
             $table->string('address',500);
 
+            $table->integer('parent_id')->nullable();
             $table->string('nominee', 128);
 
             $table->string('username')->unique();

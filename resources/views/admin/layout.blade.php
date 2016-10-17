@@ -51,7 +51,7 @@
   <div class="footer-inner">
     <div class="container">
       <div class="row">
-        <div class="span12"> &copy; 2013 <a href="http://www.egrappler.com/">Bootstrap Responsive Admin Template</a>. </div>
+        <div class="span12"> &copy; 2016 WEBGREEDS. </div>
         <!-- /span12 -->
       </div>
       <!-- /row -->
