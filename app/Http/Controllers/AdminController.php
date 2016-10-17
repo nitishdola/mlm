@@ -28,8 +28,7 @@ class AdminController extends Controller
     }
 
     public function storeUser(Request $request) {
-
-      $validator = Validator::make($data = $request->all(), User::$rules);
+        $validator = Validator::make($data = $request->all(), User::$rules);
         if ($validator->fails()) return Redirect::back()->withErrors($validator)->withInput();
     	  $message = '';
 
