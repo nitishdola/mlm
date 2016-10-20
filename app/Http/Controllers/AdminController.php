@@ -77,8 +77,12 @@ class AdminController extends Controller
 
     public function updateUser(Request $request, $id) {
       $user = User::findOrFail($id);
+      $data = $request->all();
+      if($request->placed_under != '') {
+        $data['parent_id'] = $request->placed_under;
+      }
 
-      $user->fill($request->all());
+      $user->fill($data);
       $message = '';
       if($user->save()) {
           $message .= 'User Updated Successfully !';

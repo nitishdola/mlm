@@ -75,3 +75,10 @@ Route::group(['prefix'=>'user'], function() {
         'uses' => 'AdminController@updateUser'
     ]);
 });
+
+Route::group(['prefix'=>'api'], function() {
+    Route::get('/get-user-info', [
+        'as' => 'api.getUserInfo',
+        'uses' => 'RestController@getUserInfo'
+    ]);
+});
