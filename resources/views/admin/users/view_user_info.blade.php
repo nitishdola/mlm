@@ -60,6 +60,56 @@
         </div>
         <div class="widget-content">
           @if(count($childs))
+          <!-- <div class="tree">
+            <ul>
+              <li>
+                <a href="#">Child</a>
+                <ul>
+                  <li><a href="#">Grand Child</a></li>
+                  <li>
+                    <a href="#">Grand Child</a>
+                    <ul>
+                      <li>
+                        <a href="#">Great Grand Child</a>
+                      </li>
+                      <li>
+                        <a href="#">Great Grand Child</a>
+                      </li>
+                      <li>
+                        <a href="#">Great Grand Child</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li><a href="#">Grand Child</a></li>
+                </ul>
+              </li>
+            </ul> {{ $info->name }}
+          </div> -->
+          <div class="tree">
+            <ul>
+              <li>
+                <a href="#">{{ $info->name }}</a>
+                <ul>
+                  <li><a href="#">Grand Child</a></li>
+                  <li>
+                    <a href="#">Grand Child</a>
+                    <ul>
+                      <li>
+                        <a href="#">Great Grand Child</a>
+                      </li>
+                      <li>
+                        <a href="#">Great Grand Child</a>
+                      </li>
+                      <li>
+                        <a href="#">Great Grand Child</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li><a href="#">Grand Child</a></li>
+                </ul>
+              </li>
+            </ul> 
+          </div>
           <table class="table">
             <thead>
               <th>#</th>
